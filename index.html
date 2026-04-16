@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Store - Toko Olahraga Terpercaya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+
+        :root {
+            --primary-color: #dc3545;
+            --secondary-color: #17a2b8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+    
+        .hero-section {
+            background: linear-gradient(135deg, #dc3545, #17a2b8);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .hero-section h1 {
+            animation: slideDown 0.8s ease;
+        }
+
+        .hero-section p {
+            animation: slideUp 0.8s ease 0.2s both;
+        }
+
+        .hero-section .btn {
+            animation: slideUp 0.8s ease 0.4s both;
+        }
+
+        .hero-section {
+            padding: 100px 0 !important;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        
+        .product-card {
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+        }
+
+      
+        .navbar-brand {
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            border-bottom-color: #dc3545;
+            color: #dc3545 !important;
+        }
+        
+        .nav-link.active {
+            color: #dc3545 !important;
+            font-weight: 600;
+        }
+
+        /* Button Hover Effects */
+        .btn-danger:hover {
+            background-color: #c82333;
+            box-shadow: 0 5px 20px rgba(220, 53, 69, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+      
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15) !important;
+            transform: translateY(-5px);
+        }
+
+        
+        .form-control:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        }
+
+       
+        .badge {
+            padding: 6px 10px;
+            font-size: 0.85rem;
+        }
+
+     
+        @media (max-width: 768px) {
+            .navbar .input-group {
+                width: 100% !important;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+
+       
+        html {
+            scroll-behavior: smooth;
+        }
+
+       
+        .alert {
+            border: none;
+        }
+
+        .alert-success {
+            background-color: #17a2b8;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .alert-success .btn-close {
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="text-danger" style="font-size: 1.8rem;">Sport Store</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Kontak</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-item-count" class="badge bg-danger rounded-pill d-none"></span></a>
+                    </li>
+                </ul>
+                <div class="input-group me-3" style="width: 250px;">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Cari produk..." onkeypress="if(event.key === 'Enter') handleSearch()">
+                    <button class="btn btn-danger" type="button" onclick="handleSearch()">Cari</button>
+                </div>
+
+                <button id="logoutBtn" type="button" class="btn btn-outline-light btn-sm d-none">Logout</button>
+                <a id="loginBtn" href="account-login.html" class="btn btn-outline-danger btn-sm">Login</a>
+            </div>
+        </div>
+    </nav>
+
+   
+    <section class="hero-section text-white text-center py-5" id="home">
+        <div class="container py-5">
+            <h1 class="display-3 fw-bold mb-3">Wujudkan Performa Terbaik Anda</h1>
+            <p class="lead mb-4">Toko Olahraga Terpercaya - Perlengkapan Olahraga Berkualitas Premium</p>
+            <button class="btn btn-light btn-lg fw-bold" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Belanja Sekarang</button>
+        </div>
+    </section>
+
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger"><i class="fas fa-truck"></i> Gratis Ongkir</h5>
+                            <p class="card-text">Untuk pembelian di atas Rp 100.000</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger"><i class="fas fa-credit-card"></i> Cicilan 0%</h5>
+                            <p class="card-text">Tersedia untuk semua kartu kredit</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger"><i class="fas fa-shield-alt"></i> Jaminan Keaslian</h5>
+                            <p class="card-text">100% dijamin original atau uang kembali</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="products">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4">Produk Unggulan</h2>
+            <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
+                <button class="btn btn-danger filter-btn active" onclick="filterProducts('all')">Semua</button>
+                <button class="btn btn-outline-danger filter-btn" onclick="filterProducts('sepatu')">Sepatu</button>
+                <button class="btn btn-outline-danger filter-btn" onclick="filterProducts('pakaian')">Pakaian</button>
+                <button class="btn btn-outline-danger filter-btn" onclick="filterProducts('aksesori')">Aksesori</button>
+                <button class="btn btn-outline-danger filter-btn" onclick="filterProducts('peralatan')">Peralatan</button>
+            </div>
+            <div class="row g-4" id="productsGrid">
+           
+            </div>
+        </div>
+    </section>
+
+   
+    <section class="bg-light py-5" id="about">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4">Tentang Sport Store</h2>
+            <p class="text-center mb-4 lead">Sport Store adalah toko olahraga terpercaya yang menyediakan perlengkapan olahraga berkualitas premium dengan harga terjangkau. Kami melayani atlet profesional hingga pemula dengan produk pilihan dari brand ternama. Komitmen kami memberikan pengalaman berbelanja terbaik dengan konsultasi gratis dan layanan pelanggan 24/7.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
+                            <h5 class="card-title">Kualitas Terjamin</h5>
+                            <p class="card-text">Produk original berstandar internasional</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+                            <h5 class="card-title">Berpengalaman</h5>
+                            <p class="card-text">Melayani komunitas olahraga sejak 2015</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+                            <h5 class="card-title">Komunitas Atlet</h5>
+                            <p class="card-text">Lebih dari 100 ribu atlet dan penggemar olahraga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-5">Ikuti Kami</h2>
+            <div class="text-center">
+                <a href="#" class="btn btn-lg btn-outline-danger rounded-circle me-2 mb-2" style="width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="btn btn-lg btn-outline-danger rounded-circle me-2 mb-2" style="width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="btn btn-lg btn-outline-danger rounded-circle me-2 mb-2" style="width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="btn btn-lg btn-outline-danger rounded-circle me-2 mb-2" style="width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="btn btn-lg btn-outline-danger rounded-circle mb-2" style="width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center;">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+     <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Sport Store. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+        }
+
+        function getCart() {
+            const cart = localStorage.getItem('sportStoreCart');
+            return cart ? JSON.parse(cart) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('sportStoreCart', JSON.stringify(cart));
+            updateCartIcon();
+        }
+
+        function addToCart(product) {
+            let cart = getCart();
+            const existingItemIndex = cart.findIndex(item => item.id === product.id && item.size === product.size);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += product.quantity;
+            } else {
+                cart.push(product);
+            }
+            saveCart(cart);
+            
+        }
+
+        function updateCartItemQuantity(productId, size, newQuantity) {
+            let cart = getCart();
+            const itemIndex = cart.findIndex(item => item.id === productId && item.size === size);
+
+            if (itemIndex > -1) {
+                if (newQuantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                } else {
+                    cart[itemIndex].quantity = newQuantity;
+                }
+            }
+            saveCart(cart);
+        }
+
+        function removeCartItem(productId, size) {
+            let cart = getCart();
+            cart = cart.filter(item => !(item.id === productId && item.size === size));
+            saveCart(cart);
+        }
+
+        function getCartTotalItems() {
+            return getCart().reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function updateCartIcon() {
+            const cartItemCountSpan = document.getElementById('cart-item-count');
+            if (cartItemCountSpan) {
+                const totalItems = getCartTotalItems();
+                cartItemCountSpan.textContent = totalItems > 0 ? totalItems : '';
+                cartItemCountSpan.classList.toggle('d-none', totalItems === 0);
+            }
+        }
+
+        const products = [
+            { id: 'p001', name: "Sepatu Lari UltraBoost", category: "sepatu", price: 2100000, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400", badge: "Hot", description: "Didesain untuk performa lari maksimal dengan bantalan responsif dan upper yang ringan. Ideal untuk pelari jarak jauh dan sprint." },
+            { id: 'p002', name: "Jersey Timnas Indonesia", category: "pakaian", price: 850000, img: "https://img.lazcdn.com/g/p/2cfacc6d6c5516145a330288d96531c1.jpg_720x720q80.jpg", badge: "Best Seller", description: "Jersey resmi timnas Indonesia dengan teknologi Dri-FIT yang menyerap keringat, menjaga Anda tetap kering dan nyaman di lapangan." },
+            { id: 'p003', name: "Sepatu Futsal Nike Mercurial", category: "aksesori", price: 1500000, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400", badge: "", description: "Smartwatch multifungsi dengan GPS, monitor detak jantung, dan pelacak aktivitas. Tahan air dan cocok untuk segala jenis olahraga." },
+            { id: 'p004', name: "Raket Yonex Astrox", category: "peralatan", price: 2400000, img: "https://images.unsplash.com/photo-1626225453016-8344d50c73a4?w=400", badge: "New", description: "Raket badminton profesional dengan keseimbangan kepala berat untuk pukulan bertenaga dan kontrol presisi." },
+             { id: 'p007', name: "Bola Futsal Nike", category: "pakaian", price: 650000, img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400", badge: "", description: "Hoodie training dengan bahan ringan dan breathable, menjaga Anda tetap hangat tanpa membatasi gerakan. Ideal untuk pemanasan atau pendinginan." },
+            { id: 'p005', name: "Bola Sepak Nike Mercurial", category: "peralatan", price: 1200000, img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400", badge: "Sale", description: "Bola sepak resmi dengan alur aerodinamis untuk penerbangan yang konsisten dan akurat. Cocok untuk pertandingan dan latihan." },
+            { id: 'p009', name: "Sepatu Basket Air Jump", category: "sepatu", price: 1800000, img: "https://images.unsplash.com/photo-1559056199-641a0ac8090e?w=400", badge: "New", description: "Sepatu basket dengan teknologi bantalan udara untuk lompatan eksplosif dan pendaratan yang lembut. Desain stylish dan grip superior." },
+            { id: 'p006', name: "Matras Yoga Anti-Slip", category: "aksesori", price: 350000, img: "https://images.unsplash.com/photo-1592432678894-556111003429?w=400", badge: "", description: "Matras yoga tebal dan anti-slip, memberikan kenyamanan dan stabilitas maksimal selama sesi yoga atau pilates Anda." },
+            { id: 'p008', name: "Dumbbell Set 10kg", category: "peralatan", price: 450000, img: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=400", badge: "", description: "Set dumbbell 10kg yang ergonomis, cocok untuk latihan kekuatan di rumah. Dilapisi karet untuk pegangan yang nyaman dan aman." },
+            { id: 'p010', name: "Celana Training ", category: "pakaian", price: 400000, img: "https://images.unsplash.com/photo-1541099644-47ae67f1694f?w=400", badge: "", description: "Celana training berbahan cepat kering, ideal untuk aktivitas intens. Ringan, elastis, dan nyaman dipakai sepanjang hari." },
+            { id: 'p011', name: "Botol Minum Sport 1L", category: "aksesori", price: 150000, img: "", badge: "", description: "Botol minum sport kapasitas 1 liter, bebas BPA, dengan desain ergonomis dan tutup anti-bocor. Menjaga hidrasi Anda saat berolahraga." },
+            { id: 'p012', name: "Glove Tinju Pro", category: "peralatan", price: 700000, img: "", badge: "Limited", description: "Sarung tinju profesional dengan bantalan multi-lapis untuk perlindungan maksimal dan kenyamanan. Ideal untuk sparring dan latihan." }
+        ];
+
+        function filterProducts(category) {
+            const grid = document.getElementById('productsGrid');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('btn-danger', 'active');
+                btn.classList.add('btn-outline-danger');
+                if(btn.innerText.toLowerCase() === category || (category === 'all' && btn.innerText === 'Semua')) {
+                    btn.classList.add('btn-danger', 'active');
+                    btn.classList.remove('btn-outline-danger');
+                }
+            });
+
+            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+            
+            grid.innerHTML = filtered.map(p => `
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <div class="position-relative">
+                            ${p.badge ? `<span class="badge bg-danger position-absolute m-2 top-0 start-0">${p.badge}</span>` : ''}
+                            <img src="${p.img}" class="card-img-top" alt="${p.name}" style="height: 250px; object-fit: cover;">
+                        </div>
+                        <div class="card-body text-center">
+                            <h6 class="fw-bold mb-1">${p.name}</h6>
+                            <p class="text-danger fw-bold mb-3">${formatRupiah(p.price)}</p>
+                            <a href="product-detail.html?id=${p.id}" class="btn btn-outline-danger btn-sm w-100">Detail Produk</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            filterProducts('all');
+            
+          
+            const isLoggedIn = localStorage.getItem('loggedIn');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if(isLoggedIn) {
+                loginBtn.classList.add('d-none');
+                logoutBtn.classList.remove('d-none');
+            }
+
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('loggedIn');
+                window.location.reload();
+            });
+        });
+
+        
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+            const grid = document.getElementById('productsGrid');
+            
+            if(filtered.length === 0) {
+                grid.innerHTML = '<div class="col-12 text-center my-5"><p class="lead">Produk tidak ditemukan...</p></div>';
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 shadow-sm product-card">
+                        <img src="${p.img}" class="card-img-top" alt="${p.name}" style="height: 250px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h6 class="fw-bold mb-1">${p.name}</h6>
+                            <p class="text-danger fw-bold mb-3">${formatRupiah(p.price)}</p>
+                            <a href="product-detail.html?id=${p.id}" class="btn btn-outline-danger btn-sm w-100">Detail Produk</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+
+</body>
+</html>
