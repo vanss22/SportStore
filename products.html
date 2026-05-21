@@ -29,6 +29,9 @@
                         <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-item-count" class="badge bg-danger rounded-pill d-none"></span></a>
                     </li>
                 </ul>
+                <div class="d-flex align-items-center">
+                    <button id="logoutBtn" type="button" class="btn btn-outline-light btn-sm d-none">Logout</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -46,34 +49,34 @@
                 <div class="card border-0 shadow-sm p-3">
                     <h5 class="fw-bold mb-3">Filter Kategori</h5>
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="c1"><label class="form-check-label" for="c1">Sepatu</label>
+                        <input class="form-check-input category-checkbox" type="checkbox" id="c1" value="Sepatu"><label class="form-check-label" for="c1">Sepatu</label>
                     </div>
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="c2"><label class="form-check-label" for="c2">Pakaian</label>
+                        <input class="form-check-input category-checkbox" type="checkbox" id="c2" value="Pakaian"><label class="form-check-label" for="c2">Pakaian</label>
                     </div>
                     <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="c3"><label class="form-check-label" for="c3">Aksesori</label>
+                        <input class="form-check-input category-checkbox" type="checkbox" id="c3" value="Aksesori"><label class="form-check-label" for="c3">Aksesori</label>
                     </div>
-                    <button class="btn btn-danger w-100">Terapkan</button>
+                    <button id="applyFilterBtn" type="button" class="btn btn-danger w-100">Terapkan</button>
                 </div>
             </div>
             <div class="col-lg-9">
                 <div class="row g-4">
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Sepatu">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Sepatu Lari UltraBoost</h6><p class="text-danger fw-bold">Rp 2.100.000</p>
                             <a href="product-detail.html?id=p001" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Pakaian">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://img.lazcdn.com/g/p/2cfacc6d6c5516145a330288d96531c1.jpg_720x720q80.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Jersey Timnas Indonesia</h6><p class="text-danger fw-bold">Rp 850.000</p>
                             <a href="product-detail.html?id=p002" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Aksesori">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://dynamic.zacdn.com/ne5QZyGoSriO6lqa9jAhMTohM_A=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/yonex-4035-2192013-1.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Raket Badminton Yonex</h6>
@@ -81,7 +84,7 @@
                             <a href="product-detail.html?id=p004" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Aksesori">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/2c18db8b82b74482a6d1a107130b77c1_9366/BOLA_SEPAK_UEFA_CHAMPIONS_LEAGUE_FINAL_LEAGUE_BOX_Ungu_JX9101_00_plp_standard.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Bola Sepak</h6>
@@ -89,15 +92,15 @@
                             <a href="product-detail.html?id=p005" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Pakaian">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
-                            <img src="" class="https://img.ncrsport.com/img/storage/large/GM6457-1.jpg" alt="Produk" style="height: 200px; object-fit: cover;">
+                            <img src="https://img.ncrsport.com/img/storage/large/GM6457-1.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Hoodie Sport</h6>
                             <p class="text-danger fw-bold">Rp 650.000</p>
                             <a href="product-detail.html?id=p006" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Aksesori">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://contents.mediadecathlon.com/p2939822/k$583450201f8b8586ae927c3401603bcc/matras-yoga-comfort-173-cm-61-cm-8-mm-palm-biru-tua-kimjaly-8665059.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Matras Yoga Anti-Slip</h6>
@@ -105,35 +108,35 @@
                             <a href="product-detail.html?id=p007" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Aksesori">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=400" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Dumbbell Set 10kg</h6><p class="text-danger fw-bold">Rp 450.000</p>
                             <a href="product-detail.html?id=p008" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Sepatu">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://img.ncrsport.com/img/storage/large/CZ9907-200-1.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Sepatu Basket Air Jump</h6><p class="text-danger fw-bold">Rp 1.800.000</p>
                             <a href="product-detail.html?id=p009" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Pakaian">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://gw.alicdn.com/imgextra/i4/1627412660/O1CN01gDsNc11VWKJTvgxak_!!1627412660.jpg_540x540.jpg" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Celana Training</h6><p class="text-danger fw-bold">Rp 400.000</p>
                             <a href="product-detail.html?id=p010" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Aksesori">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQujMcQ8Fqcp-3KJDVAQBuCF1v5xbEiV09DFHHwrmnix3vFzIDeh6HKeCoNU-4bxXN9AWG_6mTrNGZByYaCyp0wG_HiV47sGW03NUDjeXDDbgez1CxVIkvukyPTQFIDB3MnQZ2jcrsC&usqp=CAc" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Botol Minum Sport 1L</h6><p class="text-danger fw-bold">Rp 150.000</p>
                             <a href="product-detail.html?id=p011" class="btn btn-outline-danger btn-sm">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 product-item" data-category="Aksesori">
                         <div class="card h-100 border-0 shadow-sm product-card text-center p-3">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwSlO89a3lgHhIC8B-s4OEw5Rfq16buiaMBw&s" class="card-img-top rounded mb-3" alt="Produk" style="height: 200px; object-fit: cover;">
                             <h6 class="fw-bold">Glove Tinju Pro</h6><p class="text-danger fw-bold">Rp 700.000</p>
@@ -146,6 +149,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
     <script>
        
         function formatRupiah(number) {
@@ -207,7 +211,28 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', updateCartIcon);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartIcon();
+
+            function applyCategoryFilter() {
+                const checked = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value);
+                const items = document.querySelectorAll('.product-item');
+                items.forEach(item => {
+                    const cat = item.dataset.category || '';
+                    if (checked.length === 0 || checked.includes(cat)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            const applyBtn = document.getElementById('applyFilterBtn');
+            if (applyBtn) applyBtn.addEventListener('click', applyCategoryFilter);
+
+            const checkboxes = document.querySelectorAll('.category-checkbox');
+            checkboxes.forEach(cb => cb.addEventListener('change', applyCategoryFilter));
+        });
     </script>
     <footer class="bg-dark text-white text-center py-3">
         <div class="container"><p class="mb-0">&copy; 2026 Sport Store. Semua hak dilindungi.</p></div>
