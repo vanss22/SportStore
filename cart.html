@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Sport Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        .cart-header { background: linear-gradient(135deg, #dc3545 0%, #8b1f34 100%); color: #fff; }
+        .cart-summary { background: #fff; border-radius: .75rem; box-shadow: 0 0 30px rgba(0,0,0,.05); }
+        .table thead th { border-bottom: 2px solid #dee2e6; }
+        .btn-checkout { background-color: #dc3545; border-color: #dc3545; }
+        .btn-checkout:hover { background-color: #bd2130; border-color: #bd2130; }
+        .product-name { display: block; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cart-empty { opacity: 0.95; }
+        .cart-item-row:hover { background: #fbfbfb; }
+        @media (max-width: 768px) {
+            .product-name { max-width: 140px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html"><span class="text-danger">Sport Store</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Kontak</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="cart.html"><i class="fas fa-shopping-cart me-1"></i>Keranjang</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="cart-header py-5 mb-4">
+        <div class="container text-center">
+            <h1 class="display-6 fw-bold">Keranjang Belanja Anda</h1>
+            <p class="lead mb-0">Lihat ringkasan pesanan dan lanjutkan ke pembayaran dengan mudah.</p>
+        </div>
+    </header>
+
+    <main class="container pb-5">
+        <div class="row gy-4">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <div id="cart-alert" class="alert alert-success d-none py-2 px-3 mb-4" role="alert"></div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h5 class="card-title mb-1">Produk di Keranjang</h5>
+                                <p id="cart-summary-text" class="text-muted mb-0">Keranjang kosong. Tambahkan produk dari halaman produk.</p>
+                            </div>
+                            <span id="cart-count-badge" class="badge bg-danger rounded-pill d-none">0 items</span>
+                        </div>
+
+                        <div id="cart-empty" class="text-center py-5 d-none">
+                            <i class="fas fa-shopping-basket fa-3x text-muted mb-3"></i>
+                            <h5 class="mb-2">Keranjang kosong</h5>
+                            <p class="text-muted mb-4">Pilih produk favoritmu di halaman produk dan tambahkan ke keranjang.</p>
+                            <a href="products.html" class="btn btn-danger">Lihat Produk</a>
+                        </div>
+
+                        <div id="cart-table-wrapper" class="table-responsive d-none">
+                            <table class="table align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Produk</th>
+                                        <th scope="col">Harga</th>
+                                        <th scope="col">Jumlah</th>
+                                        <th scope="col">Subtotal</th>
+                                        <th scope="col" class="text-end">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cart-items-body"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+                            <a href="products.html" class="btn btn-outline-secondary flex-grow-1">Lanjut Belanja</a>
+                            <button id="checkoutButton" class="btn btn-checkout text-white flex-grow-1" type="button">Lanjut ke Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="cart-summary p-4">
+                    <h5 class="mb-4">Ringkasan Pesanan</h5>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Subtotal</span>
+                        <strong id="cart-subtotal">Rp 0</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Ongkos Kirim</span>
+                        <strong id="cart-shipping">Rp 0</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span>Diskon</span>
+                        <strong id="cart-discount" class="text-success">Rp 0</strong>
+                    </div>
+                    <div class="border-top pt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="fw-semibold">Total Pembayaran</span>
+                            <span id="cart-total" class="fs-5 text-danger fw-bold">Rp 3.800.000</span>
+                        </div>
+                        <p class="text-muted small mb-0">Biaya sudah termasuk pajak dan ongkir gratis untuk wilayah Jawa.</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-4 bg-white rounded shadow-sm">
+                    <h6 class="fw-semibold mb-3">Perhatian</h6>
+                    <ul class="list-unstyled mb-0 text-muted small">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Produk dikemas rapi dan siap dikirim.</li>
+                        <li class="mb-2"><i class="fas fa-shipping-fast text-primary me-2"></i>Gratis ongkir untuk wilayah Jawa.</li>
+                        <li><i class="fas fa-credit-card text-warning me-2"></i>Bayar lebih mudah melalui transfer bank atau e-wallet.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const CART_STORAGE_KEY = 'sportStoreCart';
+
+        function formatPrice(value) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(value);
+        }
+
+        function loadCart() {
+            const data = localStorage.getItem(CART_STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+        }
+
+        function getCartTotals(cart) {
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            const shipping = subtotal > 0 ? 0 : 0;
+            const discount = 0;
+            const total = subtotal + shipping - discount;
+            return { itemCount, subtotal, shipping, discount, total };
+        }
+
+        function updateCartSummary(cart) {
+            const { itemCount, subtotal, shipping, discount, total } = getCartTotals(cart);
+            const summaryText = document.getElementById('cart-summary-text');
+            const countBadge = document.getElementById('cart-count-badge');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const shippingEl = document.getElementById('cart-shipping');
+            const discountEl = document.getElementById('cart-discount');
+            const totalEl = document.getElementById('cart-total');
+
+            summaryText.textContent = itemCount > 0 ? `Total ${itemCount} item siap checkout.` : 'Keranjang kosong. Tambahkan produk dari halaman produk.';
+            countBadge.textContent = `${itemCount} item`;
+            countBadge.classList.toggle('d-none', itemCount === 0);
+            subtotalEl.textContent = formatPrice(subtotal);
+            shippingEl.textContent = formatPrice(shipping);
+            discountEl.textContent = discount > 0 ? `-${formatPrice(discount)}` : formatPrice(0);
+            totalEl.textContent = formatPrice(total);
+        }
+
+        function renderCart() {
+            const cart = loadCart();
+            const cartBody = document.getElementById('cart-items-body');
+            const cartEmpty = document.getElementById('cart-empty');
+            const cartTableWrapper = document.getElementById('cart-table-wrapper');
+            const checkoutButton = document.getElementById('checkoutButton');
+
+            cartBody.innerHTML = '';
+            if (cart.length === 0) {
+                cartEmpty.classList.remove('d-none');
+                cartTableWrapper.classList.add('d-none');
+                checkoutButton.disabled = true;
+                checkoutButton.classList.add('opacity-75');
+            } else {
+                cartEmpty.classList.add('d-none');
+                cartTableWrapper.classList.remove('d-none');
+                checkoutButton.disabled = false;
+                checkoutButton.classList.remove('opacity-75');
+
+                cart.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.dataset.productId = item.id;
+                    row.dataset.productName = item.name;
+                    row.innerHTML = `
+                        <td class="d-flex align-items-center gap-3">
+                            <img src="${item.image}" alt="${item.name}" class="rounded" style="width: 80px; object-fit: cover;">
+                            <div>
+                                <h6 class="mb-1">${item.name}</h6>
+                                <small class="text-muted">${item.description || 'Produk pilihan'}</small>
+                            </div>
+                        </td>
+                        <td class="fw-semibold">${formatPrice(item.price)}</td>
+                        <td>
+                            <div class="input-group input-group-sm" style="max-width: 140px;">
+                                <button class="btn btn-outline-secondary quantity-btn" type="button" data-action="decrease">-</button>
+                                <input type="number" class="form-control text-center cart-quantity" value="${item.quantity}" min="1" aria-label="Jumlah produk">
+                                <button class="btn btn-outline-secondary quantity-btn" type="button" data-action="increase">+</button>
+                            </div>
+                        </td>
+                        <td class="fw-semibold cart-subtotal">${formatPrice(item.price * item.quantity)}</td>
+                        <td class="text-end">
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-item-btn"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    `;
+                    cartBody.appendChild(row);
+                });
+            }
+
+            updateCartSummary(cart);
+        }
+
+        function updateItemQuantity(row, quantity) {
+            const productId = row.dataset.productId;
+            const cart = loadCart();
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            item.quantity = Math.max(1, quantity);
+            saveCart(cart);
+            renderCart();
+        }
+
+        function removeItem(row) {
+            const productId = row.dataset.productId;
+            let cart = loadCart();
+            cart = cart.filter(i => i.id !== productId);
+            saveCart(cart);
+            renderCart();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            renderCart();
+
+            const cartBody = document.getElementById('cart-items-body');
+            cartBody.addEventListener('click', function (event) {
+                const button = event.target.closest('button');
+                if (!button) return;
+                const row = button.closest('tr');
+                if (!row) return;
+
+                if (button.classList.contains('quantity-btn')) {
+                    const action = button.dataset.action;
+                    const quantityInput = row.querySelector('.cart-quantity');
+                    const currentValue = Number(quantityInput.value) || 1;
+                    const newValue = action === 'increase' ? currentValue + 1 : Math.max(1, currentValue - 1);
+                    quantityInput.value = newValue;
+                    updateItemQuantity(row, newValue);
+                }
+
+                if (button.classList.contains('remove-item-btn')) {
+                    removeItem(row);
+                }
+            });
+
+            cartBody.addEventListener('change', function (event) {
+                const input = event.target.closest('.cart-quantity');
+                if (!input) return;
+                const row = input.closest('tr');
+                const quantity = Math.max(1, Number(input.value) || 1);
+                input.value = quantity;
+                updateItemQuantity(row, quantity);
+            });
+
+            document.getElementById('checkoutButton').addEventListener('click', function () {
+                const cart = loadCart();
+                if (cart.length === 0) {
+                    const emptyToast = document.createElement('div');
+                    emptyToast.className = 'toast align-items-center text-bg-warning border-0 position-fixed top-0 end-0 m-3';
+                    emptyToast.role = 'alert';
+                    emptyToast.innerHTML = `<div class="d-flex"><div class="toast-body">Keranjang kosong. Tambahkan produk terlebih dahulu.</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
+                    document.body.appendChild(emptyToast);
+                    const bs = bootstrap.Toast.getOrCreateInstance(emptyToast, { delay: 2500 });
+                    bs.show();
+                    return;
+                }
+                // Simpan & lanjutkan ke halaman checkout
+                saveCart(cart);
+                window.location.href = 'checkout.html';
+            });
+                            // Konfirmasi checkout
+                            document.getElementById('confirmCheckoutBtn').addEventListener('click', function () {
+                                // Simulasikan pemrosesan pembayaran dan kosongkan keranjang
+                                saveCart([]);
+                                const confirmModalEl = document.getElementById('checkoutModal');
+                                const bsModal = bootstrap.Modal.getInstance(confirmModalEl);
+                                if (bsModal) bsModal.hide();
+                                const successToast = document.createElement('div');
+                                successToast.className = 'toast align-items-center text-bg-success border-0 position-fixed top-0 end-0 m-3';
+                                successToast.role = 'alert';
+                                successToast.innerHTML = `<div class="d-flex"><div class="toast-body">Pembayaran berhasil. Terima kasih!</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
+                                document.body.appendChild(successToast);
+                                bootstrap.Toast.getOrCreateInstance(successToast, { delay: 2500 }).show();
+                                renderCart();
+                            });
+        });
+    </script>
+
+        <!-- Checkout Confirmation Modal -->
+        <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="checkoutModalLabel">Konfirmasi Pesanan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="mb-2">Anda akan melakukan pembayaran untuk:</p>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Jumlah item <span id="modal-item-count">0 item</span></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Subtotal <strong id="modal-subtotal">Rp 0</strong></li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Ongkos Kirim <span id="modal-shipping">Rp 0</span></li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-semibold">Total</span>
+                            <span id="modal-total" class="fs-5 text-danger fw-bold">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button id="confirmCheckoutBtn" type="button" class="btn btn-danger">Konfirmasi & Bayar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container"><p class="mb-0">&copy; 2026 Sport Store. Semua hak dilindungi.</p></div>
+    </footer>
+</body>
+</html>

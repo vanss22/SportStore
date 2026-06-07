@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - Sport Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-color: #dc3545; }
+        .nav-link:hover { border-bottom: 2px solid #dc3545; color: #dc3545 !important; }
+        .btn-danger { background-color: #dc3545; border: none; }
+        .size-badge { cursor: pointer; transition: 0.2s; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html"><span class="text-danger">Sport Store</span></a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Kontak</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-item-count" class="badge bg-danger rounded-pill d-none"></span></a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <button id="logoutBtn" type="button" class="btn btn-outline-light btn-sm d-none">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row g-5">
+            <div class="col-md-6">
+                <img id="product-image" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="img-fluid rounded shadow-sm" alt="Produk">
+            </div>
+            <div class="col-md-6">
+                <h2 id="product-name" class="fw-bold">Sepatu Lari UltraBoost</h2>
+                <h3 id="product-price" class="text-danger fw-bold my-3">Rp 1.500.000</h3>
+                <p id="product-description" class="text-muted">Sepatu lari berkualitas tinggi dengan teknologi UltraBoost untuk kenyamanan maksimal.</p>
+                <div id="product-alert" class="alert alert-success d-none" role="alert"></div>
+                <div class="d-flex gap-3 mb-4">
+                    <input id="product-quantity" type="number" class="form-control" style="width: 80px" value="1" min="1">
+                    <button id="add-to-cart-btn" class="btn btn-danger flex-grow-1"><i class="fas fa-cart-plus me-2"></i>Tambah ke Keranjang</button>
+                </div>
+                
+                <div class="card border-0 bg-light p-3">
+                    <p class="mb-1"><i class="fas fa-check-circle text-success me-2"></i> Stok Tersedia</p>
+                    <p class="mb-0"><i class="fas fa-truck text-primary me-2"></i> Gratis Ongkir Wilayah Jawa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container"><p class="mb-0">&copy; 2026 Sport Store. Semua hak dilindungi.</p></div>
+    </footer>
+
+        <script>
+                /* Inlined cart utilities (from cart.js) */
+                const CART_STORAGE_KEY = 'sportStoreCart';
+
+                function getCart() {
+                    try {
+                        const data = localStorage.getItem(CART_STORAGE_KEY);
+                        return data ? JSON.parse(data) : [];
+                    } catch (e) {
+                        console.error('Failed to parse cart from localStorage', e);
+                        return [];
+                    }
+                }
+
+                function saveCart(cart) {
+                    try {
+                        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+                        updateCartIcon();
+                    } catch (e) {
+                        console.error('Failed to save cart', e);
+                    }
+                }
+
+                function addToCart(product) {
+                    if (!product || !product.id) return;
+                    const cart = getCart();
+                    const id = String(product.id);
+                    const existing = cart.find(i => String(i.id) === id);
+                    if (existing) {
+                        existing.quantity = Number(existing.quantity || 0) + Number(product.quantity || 1);
+                    } else {
+                        cart.push({
+                            id: id,
+                            name: product.name || '',
+                            price: Number(product.price) || 0,
+                            image: product.image || '',
+                            quantity: Number(product.quantity || 1),
+                            description: product.description || ''
+                        });
+                    }
+                    saveCart(cart);
+                }
+
+                function getCartTotalItems() {
+                    return getCart().reduce((s, i) => s + Number(i.quantity || 0), 0);
+                }
+
+                function updateCartIcon() {
+                    const total = getCartTotalItems();
+                    const navBadge = document.getElementById('cart-item-count');
+                    if (navBadge) {
+                        navBadge.textContent = total > 0 ? total : '';
+                        navBadge.classList.toggle('d-none', total === 0);
+                    }
+                    const cartBadge = document.getElementById('cart-count-badge');
+                    if (cartBadge) {
+                        cartBadge.textContent = `${total} item`;
+                        cartBadge.classList.toggle('d-none', total === 0);
+                    }
+                }
+
+                window.addEventListener('DOMContentLoaded', updateCartIcon);
+
+        </script>
+        <script>
+        const products = {
+            p001: {
+                name: "Sepatu Lari UltraBoost",
+                price: "Rp 2.100.000",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+                description: "Sepatu lari berkualitas tinggi dengan teknologi UltraBoost untuk kenyamanan maksimal."
+            },
+            p002: {
+                name: "Jersey Timnas Indonesia",
+                price: "Rp 850.000",
+                image: "https://img.lazcdn.com/g/p/2cfacc6d6c5516145a330288d96531c1.jpg_720x720q80.jpg",
+                description: "Jersey resmi Timnas Indonesia, desain eksklusif dan nyaman digunakan."
+            },
+            p004: {
+                name: "Raket Badminton Yonex",
+                price: "Rp 2.400.000",
+                image: "https://dynamic.zacdn.com/ne5QZyGoSriO6lqa9jAhMTohM_A=/filters:quality(70):format(webp)/https://static-id.zacdn.com/p/yonex-4035-2192013-1.jpg",
+                description: "Raket badminton profesional dari Yonex dengan material berkualitas tinggi."
+            },
+            p005: {
+                name: "Bola Sepak",
+                price: "Rp 500.000",
+                image: "https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/2c18db8b82b74482a6d1a107130b77c1_9366/BOLA_SEPAK_UEFA_CHAMPIONS_LEAGUE_FINAL_LEAGUE_BOX_Ungu_JX9101_00_plp_standard.jpg",
+                description: "Bola sepak standar internasional dengan kualitas terbaik untuk pertandingan."
+            },
+            p006: {
+                name: "Hoodie Sport",
+                price: "Rp 650.000",
+                image: "https://img.ncrsport.com/img/storage/large/GM6457-1.jpg",
+                description: "Hoodie olahraga dengan material berkualitas, nyaman dan stylish untuk aktivitas sehari-hari."
+            },
+            p007: {
+                name: "Matras Yoga Anti-Slip",
+                price: "Rp 350.000",
+                image: "https://contents.mediadecathlon.com/p2939822/k$583450201f8b8586ae927c3401603bcc/matras-yoga-comfort-173-cm-61-cm-8-mm-palm-biru-tua-kimjaly-8665059.jpg",
+                description: "Matras yoga anti-slip berkualitas tinggi, nyaman dan tahan lama untuk sesi yoga Anda."
+            },
+            p008: {
+                name: "Dumbbell Set 10kg",
+                price: "Rp 450.000",
+                image: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=400",
+                description: "Set dumbbell 10kg berkualitas untuk latihan kekuatan dan kebugaran di rumah."
+            },
+            p009: {
+                name: "Sepatu Basket Air Jump",
+                price: "Rp 1.800.000",
+                image: "https://img.ncrsport.com/img/storage/large/CZ9907-200-1.jpg",
+                description: "Sepatu basket premium dengan teknologi air cushion untuk performa maksimal."
+            },
+            p010: {
+                name: "Celana Training",
+                price: "Rp 400.000",
+                image: "https://gw.alicdn.com/imgextra/i4/1627412660/O1CN01gDsNc11VWKJTvgxak_!!1627412660.jpg_540x540.jpg",
+                description: "Celana training nyaman dengan bahan bernapas untuk aktivitas olahraga intensif."
+            },
+            p011: {
+                name: "Botol Minum Sport 1L",
+                price: "Rp 150.000",
+                image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQujMcQ8Fqcp-3KJDVAQBuCF1v5xbEiV09DFHHwrmnix3vFzIDeh6HKeCoNU-4bxXN9AWG_6mTrNGZByYaCyp0wG_HiV47sGW03NUDjeXDDbgez1CxVIkvukyPTQFIDB3MnQZ2jcrsC&usqp=CAc",
+                description: "Botol minum sport 1L dengan material ramah lingkungan dan mudah dibawa kemana saja."
+            },
+            p012: {
+                name: "Glove Tinju Pro",
+                price: "Rp 700.000",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwSlO89a3lgHhIC8B-s4OEw5Rfq16buiaMBw&s",
+                description: "Sarung tangan tinju profesional dengan bantalan empuk untuk latihan dan pertandingan."
+            }
+        };
+
+        function getProductIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        function parsePrice(priceText) {
+            return Number(priceText.replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function showProductAlert(message) {
+            const alert = document.getElementById('product-alert');
+            if (!alert) return;
+            alert.textContent = message;
+            alert.classList.remove('d-none');
+            setTimeout(() => alert.classList.add('d-none'), 3000);
+        }
+
+        function displayProduct(productId) {
+            const product = products[productId];
+            if (product) {
+                document.getElementById('product-image').src = product.image;
+                document.getElementById('product-name').textContent = product.name;
+                document.getElementById('product-price').textContent = product.price;
+                document.getElementById('product-description').textContent = product.description;
+                document.title = product.name + " - Sport Store";
+            } else {
+                document.getElementById('product-name').textContent = "Produk tidak ditemukan";
+                document.getElementById('product-description').textContent = "Maaf, produk yang Anda cari tidak tersedia.";
+                const addButton = document.getElementById('add-to-cart-btn');
+                if (addButton) addButton.disabled = true;
+            }
+        }
+
+        function handleAddToCart(productId) {
+            const product = products[productId];
+            if (!product) return;
+            const quantityInput = document.getElementById('product-quantity');
+            const quantity = Math.max(1, Number(quantityInput.value) || 1);
+            addToCart({
+                id: productId,
+                name: product.name,
+                price: parsePrice(product.price),
+                image: product.image,
+                quantity
+            });
+            updateCartIcon();
+            showProductAlert(`${product.name} berhasil ditambahkan ke keranjang.`);
+            quantityInput.value = 1;
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            updateCartIcon();
+            let productId = getProductIdFromURL();
+                if (!productId) {
+                    productId = 'p001';
+                }
+                displayProduct(productId);
+            const addButton = document.getElementById('add-to-cart-btn');
+            if (addButton) {
+                addButton.addEventListener('click', function () {
+                    handleAddToCart(productId);
+                });
+            }
+        });
+    </script>
+    <script src="auth.js"></script>
+</body>
+</html>
